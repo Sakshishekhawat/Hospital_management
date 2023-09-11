@@ -9,7 +9,7 @@ CREATE TABLE user_login (
 	email_id TEXT
 );
 
-DROP TABLE IF EXISTS hospital_management.patient;
+
 CREATE TABLE hospital_management.patient (
     email VARCHAR(50) PRIMARY KEY,
     password varchar(30) NOT NULL,
@@ -18,8 +18,8 @@ CREATE TABLE hospital_management.patient (
     gender VARCHAR(20) NOT NULL
 );
 
-DROP TABLE IF EXISTS hospital_management.medical_history;
-CREATE TABLE IF NOT EXISTS hospital_management.medical_history (
+
+CREATE TABLE  hospital_management.medical_history (
     medical_history_id int PRIMARY KEY,
     date DATE NOT NULL,
     conditions VARCHAR(100) NOT NULL,
@@ -27,16 +27,16 @@ CREATE TABLE IF NOT EXISTS hospital_management.medical_history (
     medication VARCHAR(100) NOT NULL
 );
 
-DROP TABLE IF EXISTS hospital_management.doctor;
-CREATE TABLE IF NOT EXISTS hospital_management.doctor (
+
+CREATE TABLE  hospital_management.doctor (
     email VARCHAR(50) PRIMARY KEY,
     gender varchar(20) NOT NULL,
     password varchar(30) NOT NULL,
     name VARCHAR(50) NOT NULL
 );
 
-DROP TABLE IF EXISTS hospital_management.appointment;
-CREATE TABLE IF NOT EXISTS hospital_management.appointment (
+
+CREATE TABLE  hospital_management.appointment (
     appointment_id int PRIMARY KEY,
     date DATE NOT NULL,
     start_time TIME NOT NULL,
@@ -44,8 +44,8 @@ CREATE TABLE IF NOT EXISTS hospital_management.appointment (
     status varchar(15) NOT NULL
 );
 
-DROP TABLE IF EXISTS hospital_management.patient_visits;
-CREATE TABLE IF NOT EXISTS hospital_management.patient_visits (
+
+CREATE TABLE  hospital_management.patient_visits (
     patient VARCHAR(50) NOT NULL,
     appt SERIAL,
     concerns varchar(40) NOT NULL,
@@ -55,8 +55,8 @@ CREATE TABLE IF NOT EXISTS hospital_management.patient_visits (
     PRIMARY KEY (patient, appt)
 );
 
-DROP TABLE IF EXISTS hospital_management.schedule;
-CREATE TABLE IF NOT EXISTS hospital_management.schedule (
+
+CREATE TABLE  hospital_management.schedule (
     schedule_id SERIAL UNIQUE,
     start_time TIME NOT NULL,
     end_time TIME NOT NULL,
@@ -65,8 +65,8 @@ CREATE TABLE IF NOT EXISTS hospital_management.schedule (
     PRIMARY KEY (schedule_id, start_time, end_time, break_time, day)
 );
 
-DROP TABLE IF EXISTS hospital_management.patients_history;
-CREATE TABLE IF NOT EXISTS hospital_management.patients_history (
+
+CREATE TABLE  hospital_management.patients_history (
     patient VARCHAR(50) NOT NULL,
     history SERIAL,
     FOREIGN KEY (patient) REFERENCES hospital_management.patient (email),
@@ -74,8 +74,8 @@ CREATE TABLE IF NOT EXISTS hospital_management.patients_history (
     PRIMARY KEY (history)
 );
 
-DROP TABLE IF EXISTS hospital_management.diagnose;
-CREATE TABLE IF NOT EXISTS hospital_management.diagnose (
+
+CREATE TABLE hospital_management.diagnose (
     appt SERIAL,
     doctor VARCHAR(50) NOT NULL,
     diagnosis varchar(40) NOT NULL,
@@ -93,7 +93,7 @@ CREATE TABLE IF NOT EXISTS hospital_management.doctor_schedules (
     PRIMARY KEY (sched, doctor)
 );
 
-CREATE TABLE IF NOT EXISTS hospital_management.doctor_view_history (
+CREATE TABLE hospital_management.doctor_view_history (
     history SERIAL,
     doctor VARCHAR(50) NOT NULL,
     FOREIGN KEY (doctor) REFERENCES hospital_management.doctor (email),
